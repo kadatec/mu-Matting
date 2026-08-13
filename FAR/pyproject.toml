@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sparsemat3d"
+version = "0.1.0"
+description = "FAR: four-frame 3D sparse video alpha refinement"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "numpy",
+  "opencv-python",
+  "Pillow",
+  "torch",
+  "tomli; python_version < '3.11'",
+]
+
+[project.scripts]
+sparsemat3d-train = "sparsemat3d.train:main"
+sparsemat3d-evaluate = "sparsemat3d.evaluate:main"
+sparsemat3d-infer = "sparsemat3d.infer:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

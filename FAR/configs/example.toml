@@ -1,0 +1,45 @@
+[model]
+first_stage_config = "../../CAP/configs/sapiens_0.3b_alpha_model.py"
+first_stage_checkpoint = "../../checkpoints/cap_final.pth"
+dilation_kernel = 5
+
+[data]
+sequence_length = 4
+rvm_root = "../data/RVM_img_alpha"
+background_root = "../data/BackgroundVideos"
+mattehuman_root = "../data/MatteHuman_video_alpha"
+validation_manifest = "../data/validation.json"
+evaluation_manifest = "../data/evaluation.json"
+rvm_repeat = 1
+mattehuman_repeat = 2
+image_size = [512, 512]
+lowres_size = [512, 512]
+
+[loss]
+alpha_weights = [0.1, 0.1, 1.0]
+composition_weight = 0.5
+coherence_weight = 0.0
+laplacian_levels = 3
+
+[train]
+batch_size = 32
+num_workers = 32
+epochs = 30
+learning_rate = 1e-4
+min_learning_rate = 1e-5
+betas = [0.9, 0.999]
+decay_every = 5
+validation_interval = 1
+seed = 0
+
+[validation]
+batch_size = 1
+num_workers = 1
+
+[evaluation]
+batch_size = 1
+num_workers = 1
+
+[output]
+best_checkpoint = "../outputs/best_joint.pt"
+final_checkpoint = "../outputs/final_joint.pt"
